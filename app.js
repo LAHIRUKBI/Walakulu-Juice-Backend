@@ -34,7 +34,8 @@ app.get("/", (req, res) => {
 });
 
 // API Routes
-app.use("/api", require("./src/routes/subscription/index"));
+app.use("/api", require("./src/routes/subscriptionRoutes"));
+app.use("/api", require("./src/routes/contactRoutes"));
 
 // Connect to Database and Start Server
 const startServer = async () => {

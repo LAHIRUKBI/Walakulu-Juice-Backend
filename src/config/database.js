@@ -4,10 +4,8 @@ const { success, error } = require("consola");
 
 const connectDB = async () => {
   try {
-
+    // Remove the deprecated options - they are no longer needed in MongoDB Driver v4+
     await connect(DB, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
       serverSelectionTimeoutMS: REQUEST_TIMEOUT,
     });
 
@@ -15,6 +13,7 @@ const connectDB = async () => {
   } catch (err) {
     error({ message: `❌ Failed to connect to MongoDB:\n${err}`, badge: true });
 
+    // Automatic restart - retry connection after 5 seconds
     setTimeout(connectDB, 5000);
   }
 };
